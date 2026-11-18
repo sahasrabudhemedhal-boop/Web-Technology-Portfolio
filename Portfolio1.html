@@ -1,0 +1,733 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Medhal Sahasrabudhe - Web Technology Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+<style>
+:root{
+--bg:#f2f5f3;
+--surface:#fff;
+--ink:#14213d;
+--muted:#55607a;
+--line:#d5dcd8;
+--accent:#2b50ff;
+--mark:#ffe45e;
+--sans:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;
+--mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+box-sizing:border-box
+}
+
+@media(prefers-color-scheme:dark){
+:root:not([data-theme=light]){
+--bg:#10151f;
+--surface:#18202e;
+--ink:#e8edf7;
+--muted:#9aa6bf;
+--line:#2a3447;
+--accent:#8aa2ff;
+--mark:#ffe45e
+}
+}
+
+:root[data-theme=dark]{
+--bg:#10151f;
+--surface:#18202e;
+--ink:#e8edf7;
+--muted:#9aa6bf;
+--line:#2a3447;
+--accent:#8aa2ff;
+--mark:#ffe45e
+}
+
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth}
+
+body{
+margin:0;
+background:var(--bg);
+color:var(--ink);
+font:400 1.05rem/1.6 var(--sans)
+}
+
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+
+nav{
+position:sticky;
+top:0;
+background:var(--bg);
+border-bottom:1px solid var(--line);
+z-index:5
+}
+
+nav .wrap{
+display:flex;
+gap:20px;
+align-items:center;
+padding-top:12px;
+padding-bottom:12px;
+flex-wrap:wrap
+}
+
+nav b{margin-right:auto;font-weight:800}
+nav a{text-decoration:none;color:var(--ink)}
+nav a:hover{text-decoration:underline}
+
+nav button{
+background:none;
+border:1px solid var(--line);
+color:var(--ink);
+border-radius:6px;
+padding:4px 10px;
+font:inherit;
+cursor:pointer
+}
+
+.hero{padding:56px 0 40px}
+
+.window{
+background:var(--surface);
+border:2px solid var(--ink);
+border-radius:10px;
+box-shadow:8px 8px 0 var(--ink);
+overflow:hidden
+}
+
+.bar{
+display:flex;
+gap:8px;
+align-items:center;
+padding:10px 14px;
+border-bottom:2px solid var(--ink)
+}
+
+.bar i{
+width:12px;
+height:12px;
+border-radius:50%;
+border:2px solid var(--ink)
+}
+
+.bar span{
+font:.8rem var(--mono);
+color:var(--muted);
+margin-left:8px
+}
+
+.hero-body{padding:36px 28px 40px}
+
+h1{
+font-size:clamp(2.2rem,7vw,4.4rem);
+line-height:1.02;
+margin:0 0 16px;
+font-weight:800;
+letter-spacing:-.02em
+}
+
+h1 mark{
+background:var(--mark);
+color:#14213d;
+padding:0 .12em
+}
+
+.hero p{max-width:56ch;color:var(--muted);margin:0 0 22px}
+
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+
+.btn{
+display:inline-block;
+padding:10px 18px;
+border:2px solid var(--ink);
+border-radius:8px;
+text-decoration:none;
+color:var(--ink);
+font-weight:600
+}
+
+.btn.main{background:var(--ink);color:var(--bg)}
+
+section{padding:48px 0}
+
+h2{
+font-size:1.9rem;
+margin:0 0 6px;
+font-weight:800;
+letter-spacing:-.01em
+}
+
+.sub{color:var(--muted);margin:0 0 24px}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+gap:18px
+}
+
+.card{
+background:var(--surface);
+border:1px solid var(--line);
+border-radius:8px;
+padding:20px;
+display:flex;
+flex-direction:column;
+gap:10px
+}
+
+.card h3{margin:0;font-size:1.2rem}
+.card p{margin:0;color:var(--muted);font-size:.98rem;flex:1}
+
+.card h4{
+margin:8px 0 0;
+font-size:1rem
+}
+
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+
+.tags span{
+font:.78rem var(--mono);
+border:1px solid var(--line);
+border-radius:4px;
+padding:2px 7px
+}
+
+/* Project feature styling */
+
+.feature-list{
+padding-left:20px;
+margin:0
+}
+
+.feature-list li{margin-bottom:12px}
+
+.feature-list strong{
+color:var(--ink);
+font-size:.95rem
+}
+
+.feature-list p{
+margin:3px 0 0;
+font-size:.9rem;
+color:var(--muted)
+}
+
+.links{
+display:flex;
+gap:16px;
+font-weight:600;
+margin-top:8px
+}
+
+details{
+background:var(--surface);
+border:1px solid var(--line);
+border-radius:8px;
+margin-bottom:12px
+}
+
+summary{
+cursor:pointer;
+padding:16px 20px;
+display:flex;
+gap:12px;
+align-items:center;
+font-weight:600;
+list-style:none
+}
+
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";margin-left:auto;font-size:1.4rem}
+details[open] summary::after{content:"\2212"}
+
+summary .count{
+font:.8rem var(--mono);
+background:var(--mark);
+color:#14213d;
+border-radius:4px;
+padding:2px 8px
+}
+
+.files{padding:0 20px 18px}
+
+.files input{
+width:100%;
+padding:9px 12px;
+margin-bottom:12px;
+border:1px solid var(--line);
+border-radius:6px;
+background:var(--bg);
+color:var(--ink);
+font:inherit
+}
+
+.files ul{
+list-style:none;
+margin:0;
+padding:0;
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+gap:6px 18px
+}
+
+.files li a{
+font:.88rem var(--mono);
+word-break:break-all
+}
+
+.note{color:var(--muted);font-size:.95rem}
+
+.about{display:grid;gap:12px;max-width:62ch}
+
+footer{
+border-top:1px solid var(--line);
+padding:28px 0;
+color:var(--muted);
+font-size:.95rem
+}
+
+@media(max-width:560px){
+.hero-body{padding:24px 18px}
+.window{box-shadow:5px 5px 0 var(--ink)}
+}
+
+@media(prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<div class="wrap">
+<b id="navName">Portfolio</b>
+<a href="#projects">Projects</a>
+<a href="#assignments">Assignments</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+<button id="theme" aria-label="Toggle dark mode">Theme</button>
+</div>
+</nav>
+
+<header class="hero">
+<div class="wrap">
+<div class="window">
+
+<div class="bar">
+<i></i><i></i><i></i>
+<span id="urlBar">sahasrabudhemedhal-boop.github.io</span>
+</div>
+
+<div class="hero-body">
+
+<h1 id="heroTitle">Hi, I'm <mark>Medhal Sahasrabudhe</mark>.<br>I build for the web.</h1>
+
+<p id="heroText">
+Web Technology student. This portfolio showcases my projects,
+technical skills and practical assignments.
+</p>
+
+<div class="btns">
+<a class="btn main" href="#projects">See my projects</a>
+<a class="btn" id="ghLink" href="https://github.com/sahasrabudhemedhal-boop" target="_blank" rel="noopener">GitHub Profile</a>
+</div>
+
+</div>
+</div>
+</div>
+</header>
+
+<main class="wrap">
+
+<section id="projects">
+<h2>Projects</h2>
+<p class="sub">Explore my projects, their key features and technologies used.</p>
+<div class="grid" id="projectGrid"></div>
+</section>
+
+<section id="assignments">
+<h2>Assignments</h2>
+<p class="sub">Five assignments with about 100 programs in total. Open one to explore its files.</p>
+<div id="assignList"></div>
+</section>
+
+<section id="about">
+<h2>About me</h2>
+<div class="about">
+<p id="aboutText">
+I am a student of Web Technology. I enjoy building websites
+with HTML, CSS and JavaScript and learning how the web works.
+</p>
+<div class="tags" id="skills"></div>
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<p>Email: <a id="mail" href="mailto:sahasrabudhe@gmail.com">sahasrabudhe@gmail.com</a></p>
+<p>GitHub:
+<a href="https://github.com/sahasrabudhemedhal-boop"
+target="_blank" rel="noopener">
+github.com/sahasrabudhemedhal-boop
+</a>
+</p>
+</section>
+
+</main>
+
+<footer>
+<div class="wrap">
+Built with HTML, CSS and JavaScript. Hosted on GitHub Pages.
+</div>
+</footer>
+
+<script>
+
+/* ============ EDIT ONLY THIS BLOCK ============ */
+
+const CONFIG = {
+
+name: "Medhal Sahasrabudhe",
+
+github: "sahasrabudhemedhal-boop",
+
+assignmentsRepo: "Web_practical",
+
+branch: "main",
+
+email: "sahasrabudhe@gmail.com",
+
+about: "I am a Web Technology student interested in web development and creating interactive applications. I enjoy working with HTML, CSS and JavaScript while continuously exploring new technologies and improving my technical skills.",
+
+skills: [
+"HTML",
+"HTML5",
+"CSS",
+"JavaScript",
+"Supabase",
+"Git",
+"GitHub"
+],
+
+assignments: [
+{ title: "Assignment 1: HTML basics", folder: "" },
+{ title: "Assignment 2: Images and tables", folder: "" },
+{ title: "Assignment 3: Forms", folder: "" },
+{ title: "Assignment 4: HTML5", folder: "" },
+{ title: "Assignment 5: JavaScript", folder: "" }
+],
+
+projects: [
+
+{
+title: "MindSpace-21",
+
+text: "A student wellness web application designed to promote mental well-being through interactive activities, personalized support and an engaging user experience.",
+
+tags: ["HTML", "CSS", "JavaScript", "Supabase"],
+
+features: [
+
+{
+title: "Chatbot Development",
+description: "Worked on and developed an interactive chatbot to enhance user engagement and provide a conversational experience."
+},
+
+{
+title: "Supabase Database Integration",
+description: "Integrated Supabase for database management and storing application data."
+},
+
+{
+title: "Student Wellness Activities",
+description: "Developed wellness-focused activities and interactive features to encourage student engagement and well-being."
+}
+
+],
+
+repo: "MindSpace-21",
+
+demo: ""
+
+},
+
+{
+title: "Smart Ingredient-Based Recipe Retrieval System",
+
+text: "A web-based recipe retrieval system that helps users discover recipes based on the ingredients they have available, making recipe searching easier and more convenient.",
+
+tags: ["HTML", "CSS", "JavaScript", "AJAX", "PHP"],
+
+features: [
+
+{
+title: "Ingredient-Based Search",
+description: "Allows users to search for recipes using the ingredients they have available."
+},
+
+{
+title: "AJAX Integration",
+description: "Uses AJAX to retrieve data dynamically without reloading the entire webpage."
+},
+
+{
+title: "Recipe Retrieval",
+description: "Displays relevant recipes based on selected ingredients."
+},
+
+{
+title: "PHP Backend",
+description: "Uses PHP for server-side processing and recipe-related operations."
+}
+
+],
+
+repo: "Smart-Ingredient-based-Recipe-Retrieval-System",
+
+demo: ""
+
+}
+
+]
+
+};
+
+/* ============================================== */
+
+const C = CONFIG;
+const $ = s => document.querySelector(s);
+
+const gh = `https://github.com/${C.github}`;
+
+$("#navName").textContent = C.name;
+
+$("#urlBar").textContent = C.github;
+
+$("#heroTitle").innerHTML = `Hi, I'm <mark></mark>.<br>I build for the web.`;
+
+$("#heroTitle mark").textContent = C.name;
+
+$("#ghLink").href = gh;
+
+$("#aboutText").textContent = C.about;
+
+$("#mail").href = "mailto:" + C.email;
+$("#mail").textContent = C.email;
+
+C.skills.forEach(s => {
+const e = document.createElement("span");
+e.textContent = s;
+$("#skills").append(e);
+});
+
+document.title = `${C.name} - Web Technology Portfolio`;
+
+
+/* Projects */
+
+C.projects.forEach(p => {
+
+const d = document.createElement("article");
+d.className = "card";
+
+d.innerHTML = `
+<h3></h3>
+<p></p>
+<div class="tags"></div>
+<h4>Key Features</h4>
+<ul class="feature-list"></ul>
+<div class="links">
+<a target="_blank" rel="noopener">View Code</a>
+</div>
+`;
+
+d.querySelector("h3").textContent = p.title;
+d.querySelector("p").textContent = p.text;
+
+p.tags.forEach(t => {
+const s = document.createElement("span");
+s.textContent = t;
+d.querySelector(".tags").append(s);
+});
+
+p.features.forEach(f => {
+
+const li = document.createElement("li");
+
+const strong = document.createElement("strong");
+const description = document.createElement("p");
+
+strong.textContent = f.title;
+description.textContent = f.description;
+
+li.append(strong, description);
+
+d.querySelector(".feature-list").append(li);
+
+});
+
+d.querySelector(".links a").href = `${gh}/${p.repo}`;
+
+if(p.demo){
+
+const a = document.createElement("a");
+
+a.href = p.demo;
+a.target = "_blank";
+a.rel = "noopener";
+a.textContent = "Live Demo";
+
+d.querySelector(".links").append(a);
+
+}
+
+$("#projectGrid").append(d);
+
+});
+
+
+/* Assignments: file lists load from GitHub automatically */
+
+const repoApi = `https://api.github.com/repos/${C.github}/${C.assignmentsRepo}/contents`;
+
+const rootDirs = fetch(`${repoApi}?ref=${C.branch}`)
+.then(r => r.ok ? r.json() : [])
+.then(x => x.filter(f => f.type === "dir")
+.map(f => f.name)
+.sort((p,q) => p.localeCompare(q,undefined,{numeric:true})))
+.catch(() => []);
+
+C.assignments.forEach((a,i) => {
+
+let folderUrl = `${gh}/${C.assignmentsRepo}`;
+
+const det = document.createElement("details");
+
+det.innerHTML = `
+<summary>
+<span></span>
+<span class="count">...</span>
+</summary>
+<div class="files">
+<p class="note">Open to load files.</p>
+</div>
+`;
+
+det.querySelector("summary span").textContent = a.title;
+
+let loaded = false;
+
+det.addEventListener("toggle",async()=>{
+
+if(!det.open || loaded) return;
+
+loaded = true;
+
+const box = det.querySelector(".files");
+const count = det.querySelector(".count");
+
+try{
+
+const folder = a.folder || (await rootDirs)[i];
+
+if(!folder) throw new Error("no folder");
+
+folderUrl = `${gh}/${C.assignmentsRepo}/tree/${C.branch}/${folder}`;
+
+const r = await fetch(`${repoApi}/${encodeURIComponent(folder)}?ref=${C.branch}`);
+
+if(!r.ok) throw new Error(r.status);
+
+const items = (await r.json())
+.filter(f => f.type === "file")
+.sort((x,y)=>x.name.localeCompare(y.name,undefined,{numeric:true}));
+
+count.textContent = items.length + " files";
+
+box.innerHTML = `
+<input type="search" placeholder="Search files in this assignment" aria-label="Search files">
+<ul></ul>
+<p class="note">
+<a target="_blank" rel="noopener">Open folder on GitHub</a>
+</p>
+`;
+
+box.querySelector("p a").href = folderUrl;
+
+const ul = box.querySelector("ul");
+
+items.forEach(f=>{
+
+const li = document.createElement("li");
+const l = document.createElement("a");
+
+l.href = f.html_url;
+l.target = "_blank";
+l.rel = "noopener";
+l.textContent = f.name;
+
+li.append(l);
+ul.append(li);
+
+});
+
+box.querySelector("input").addEventListener("input",e=>{
+
+const q = e.target.value.toLowerCase();
+
+ul.querySelectorAll("li").forEach(li=>{
+li.hidden = !li.textContent.toLowerCase().includes(q);
+});
+
+});
+
+}catch(e){
+
+count.textContent = "GitHub";
+
+box.innerHTML = `
+<p class="note">
+The file list could not load.
+Open the assignment on GitHub instead:
+<a target="_blank" rel="noopener"></a>
+</p>
+`;
+
+box.querySelector("a").href = folderUrl;
+box.querySelector("a").textContent = folderUrl;
+
+}
+
+});
+
+$("#assignList").append(det);
+
+});
+
+
+/* Theme toggle */
+
+$("#theme").addEventListener("click",()=>{
+
+const r = document.documentElement;
+
+const dark = r.dataset.theme
+? r.dataset.theme === "dark"
+: matchMedia("(prefers-color-scheme: dark)").matches;
+
+r.dataset.theme = dark ? "light" : "dark";
+
+});
+
+</script>
+
+</body>
+</html>
